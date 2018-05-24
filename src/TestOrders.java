@@ -14,6 +14,20 @@ public class TestOrders {
 		System.out.println(anvil);
 		System.out.println(balloons);
 
+		System.out.println("The tax Rate is currently: " + Order.taxRate);
+		Order.computeTaxOn(3000.00);
+		anvil.computeTax();
+		balloons.computeTax();
+
+		Order.setTaxRate(.06);
+		System.out.println("The tax Rate is currently: " + Order.taxRate);
+		Order.computeTaxOn(3000.00);
+		anvil.computeTax();
+		balloons.computeTax();
+
+		MyDate date3 = new MyDate(5, 20, 2008);
+		Order anotherAnvil = new Order(date3, 200, "Road Runner");
+		System.out.println(anotherAnvil);
 	}
 
 }
