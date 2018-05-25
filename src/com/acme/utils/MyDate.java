@@ -1,7 +1,9 @@
+package com.acme.utils;
+
 public class MyDate {
-    int day;
-    int year;
-    int month;
+    public int day;
+    public int year;
+    public int month;
 
     {
         this.month = 1;
@@ -9,9 +11,9 @@ public class MyDate {
         this.year = 2000;
     }
 
-    MyDate() { }
+    public MyDate() { }
 
-    MyDate(int month, int day, int year) {
+    public MyDate(int month, int day, int year) {
         this.month = month;
         this.day = day;
         this.year = year;
