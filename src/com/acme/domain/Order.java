@@ -41,4 +41,36 @@ public class Order {
 		System.out.println("The tax for this order is: " + orderAmount * taxRate);
 		return orderAmount * taxRate;
 	}
+
+	public char jobSize() {
+		if(quantity <= 25) {
+			return 'S';
+		} else if(quantity <= 75) {
+			return 'M';
+		} else if(quantity <= 150) {
+			return 'L';
+		} else {
+			return 'X';
+		}
+	}
+
+	public double computeTotal() {
+		double discount = 0.0;
+		switch(jobSize()) {
+			case 'M':
+				discount = .01;
+				break;
+			case 'L':
+				discount = .02;
+				break;
+			case 'X':
+				discount = .03;
+				break;
+		}
+		double orderTotal = orderAmount - discount * orderAmount;
+		if(orderAmount < 1500) {
+			orderTotal += computeTax();
+		}
+		return orderTotal;
+	}
 }
