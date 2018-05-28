@@ -12,6 +12,8 @@ public class TestOrders {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		Order.setRushable((orderDate, orderAmount) -> orderAmount > 1500);
+
 		MyDate date1 = new MyDate(1,20,2008);
 		Solid s1 = new Solid("Acme Anvil", 1668, 0.3, Good.UnitOfMeasureType.CUBIC_METER, false, 500, 0.25, 0.3);
 		Order anvil = new Order(date1, 2000.00, "Wile E Coyote", s1, 10);
@@ -33,6 +35,9 @@ public class TestOrders {
 		Order.computeTaxOn(3000.00);
 		anvil.computeTax();
 		balloons.computeTax();
+
+		System.out.println("Anvil isPriorityOrder: " + anvil.isPriorityOrder());
+		System.out.println("Balloons isPriorityOrder: " + balloons.isPriorityOrder());
 
 		MyDate date3 = new MyDate(5, 20, 2008);
 		Order anotherAnvil = new Order(date3, 200, "Road Runner");

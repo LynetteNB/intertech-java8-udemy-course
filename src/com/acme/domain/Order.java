@@ -9,6 +9,7 @@ public class Order {
 	private Product product;
 	private int quantity;
 	private static double taxRate;
+	private static Rushable rushable;
 
 	static {
 		taxRate = .05;
@@ -62,6 +63,14 @@ public class Order {
 
 	public int getQuantity() {
 		return quantity;
+	}
+
+	public static Rushable getRushable() {
+		return rushable;
+	}
+
+	public static void setRushable(Rushable rushable) {
+		Order.rushable = rushable;
 	}
 
 	public void setQuantity(int quantity) {
@@ -121,5 +130,13 @@ public class Order {
 			orderTotal += computeTax();
 		}
 		return orderTotal;
+	}
+
+	public boolean isPriorityOrder() {
+		boolean priorityOrder = false;
+		if(rushable != null) {
+			priorityOrder = rushable.isRushable(orderDate, orderAmount);
+		}
+		return priorityOrder;
 	}
 }
