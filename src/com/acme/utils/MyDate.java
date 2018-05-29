@@ -27,11 +27,10 @@ public class MyDate {
     }
 
     public MyDate(int month, int day, int year) {
-        if(valid(day, month, year)){
-            this.month = (byte) month;
-            this.day = (byte) day;
-            this.year = (short) year;
-        }
+        valid(day, month, year);
+        this.month = (byte) month;
+        this.day = (byte) day;
+        this.year = (short) year;
     }
 
     public int getDay() {
@@ -39,9 +38,8 @@ public class MyDate {
     }
 
     public void setDay(int day) {
-        if(valid(day, month, year)){
-            this.day = (byte) day;
-        }
+        valid(day, month, year);
+        this.day = (byte) day;
     }
 
     public int getYear() {
@@ -49,9 +47,8 @@ public class MyDate {
     }
 
     public void setYear(int year) {
-        if(valid(day, month, year)){
-            this.year = (short) year;
-        }
+        valid(day, month, year);
+        this.year = (short) year;
     }
 
     public int getMonth() {
@@ -59,9 +56,8 @@ public class MyDate {
     }
 
     public void setMonth(int month) {
-        if(valid(day, month, year)){
-            this.month = (byte) month;
-        }
+        valid(day, month, year);
+        this.month = (byte) month;
     }
 
     public static MyDate[] getHolidays() {
@@ -77,11 +73,10 @@ public class MyDate {
     }
 
     public void setDate(int month, int day, int year) {
-        if(valid(day, month, year)) {
-            this.month = (byte) month;
-            this.day = (byte) day;
-            this.year = (short) year;
-        }
+        valid(day, month, year);
+        this.month = (byte) month;
+        this.day = (byte) day;
+        this.year = (short) year;
     }
 
     public static void leapYears() {
@@ -93,21 +88,27 @@ public class MyDate {
         }
     }
 
-    private boolean valid(int day, int month, int year) {
-        if(day > 31 || day < 1 || month > 12 || month < 1 || year < 0) {
-            System.out.println("Attempting to create a non-valid date " + month + "/" + day + "/" + year);
-            return false;
+    private void valid(int day, int month, int year) {
+        try {
+            if (day > 31 || day < 1 || month > 12 || month < 1 || year < 0) {
+                throw new InvalidDateException("Attempting to create a non-valid date " + month + "/" + day + "/" + year);
+            }
+            switch (month) {
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    if (day > 30)
+                        throw new InvalidDateException(day + " is not a valid day for Month: " + month);
+                case 2:
+                    if (day > 28 && (year % 4 != 0 || day != 29))
+                        throw new InvalidDateException(day + " is not a valid day for Month: " + month);
+            }
+        } catch (InvalidDateException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            System.exit(0);
         }
-        switch(month) {
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                return day <= 30;
-            case 2:
-                return day <= 28 || (day == 29 && year %4 == 0);
-        }
-        return true;
     }
 
     public boolean equals(Object o) {

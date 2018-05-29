@@ -8,9 +8,9 @@ public class TestMyDate{
 		MyDate date1 = new MyDate(11,11,1918);
 
 		MyDate date2 = new MyDate();
-		date2.setDay(11);
-		date2.setMonth(11);
-		date2.setYear(1918);
+		date2.setDay(28);
+		date2.setMonth(2);
+		date2.setYear(1903);
 
 		MyDate date3 = new MyDate();
 		date3.setDate(4,21,1968);
