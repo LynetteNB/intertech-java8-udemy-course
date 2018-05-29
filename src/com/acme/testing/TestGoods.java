@@ -31,5 +31,14 @@ public class TestGoods {
         System.out.println(glue + " can ship via Post office? " + glue.canShipViaPostOffice());
         System.out.println(anvil + " can ship via Post office? " + anvil.canShipViaPostOffice());
         System.out.println(paint + " can ship via Post office? " + paint.canShipViaPostOffice());
+
+		System.out.println(Good.getCatalog());
+		Good.getCatalog().remove(new Liquid("Acme Invisible Paint", 2490, 0.65,UnitOfMeasureType.GALLON, true, 0.70, 12));
+		System.out.println(Good.getCatalog());
+		Solid toaster = new Solid("Acme Toaster", 1755, 0.75, UnitOfMeasureType.CUBIC_FEET, false, 1.0, 1.0, 1.0);
+		Good.getCatalog().add(toaster);
+		Good.getCatalog().add(toaster);
+		System.out.println(Good.getCatalog());
+		System.out.println("Flammable products: " + Good.flammableList());
 	}
 }
