@@ -29,6 +29,8 @@ public class TestMyDate{
 
 		//MyDate.leapYears();
 
+        MyDate.listHolidays();
+
         MyDate newYear = new MyDate(1, 1, 2009);
         MyDate fiscalStart = new MyDate(1, 1, 2009);
 

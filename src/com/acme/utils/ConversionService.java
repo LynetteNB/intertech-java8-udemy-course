@@ -6,7 +6,8 @@ public class ConversionService {
     /**
      * weight conversion rates
      */
-    public static BigDecimal kilogramToPounds = new BigDecimal(2.2046);
+    public static double kilogramToPounds = 2.2046;
+    public static BigDecimal bigKilogramToPounds = new BigDecimal(kilogramToPounds);
     public static BigDecimal kilogramToGrams = new BigDecimal(1000);
     public static BigDecimal kilogramToOunces = new BigDecimal(35.274);
 
@@ -19,7 +20,11 @@ public class ConversionService {
     public static short literToMilliliters = 1_000;
 
     public static BigDecimal pounds (BigDecimal kilograms) {
-        return kilograms.multiply(kilogramToPounds);
+        return kilograms.multiply(bigKilogramToPounds);
+    }
+
+    public static double pounds (double kilograms) {
+        return kilograms * kilogramToPounds;
     }
 
     public static BigDecimal grams (BigDecimal kilograms) {
@@ -44,5 +49,14 @@ public class ConversionService {
 
     public static int milliliters (int liters) {
         return liters * literToMilliliters;
+    }
+
+    public static double[][] allKgToPounds(double... kilogramValues) {
+        double[][] k2p = new double[kilogramValues.length][2];
+            for(int i = 0; i < kilogramValues.length; i++) {
+                k2p[i][0] = kilogramValues[i];
+                k2p[i][1] = pounds(kilogramValues[i]);
+            }
+        return k2p;
     }
 }
