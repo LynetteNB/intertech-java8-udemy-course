@@ -2,7 +2,7 @@ package com.acme.domain;
 
 import java.util.*;
 
-public abstract class Good implements Product{
+public abstract class Good implements Product, Comparable<Good>{
     public enum UnitOfMeasureType {LITER, GALLON, CUBIC_METER, CUBIC_FEET}
     private String name;
     private int modelNumber;
@@ -10,7 +10,7 @@ public abstract class Good implements Product{
     private UnitOfMeasureType unitOfMeasure;
     private boolean flammable = true;
     private double weightPerUofM;
-    private static Set catalog;
+    private static List<Good> catalog;
 
     static {
         Liquid glue = new Liquid("Acme Glue", 2334, 4, UnitOfMeasureType.LITER,false, 15, 6);
@@ -21,7 +21,7 @@ public abstract class Good implements Product{
         Solid pistol = new Solid("Acme Disintegrating Pistol", 1587, 0.1,UnitOfMeasureType.CUBIC_FEET, false, 1, 0.5, 2);
         Liquid nitro = new Liquid("Acme Nitroglycerin", 4289, 1.0,UnitOfMeasureType.CUBIC_METER, true, 1.5, 0.25);
         Liquid oil = new Liquid("Acme Oil", 4275, 1.0,UnitOfMeasureType.CUBIC_METER, true, 1.5, 0.25);
-        catalog = new HashSet();
+        catalog = new ArrayList<>();
         catalog.add(glue);
         catalog.add(paint);
         catalog.add(anvil);
@@ -99,7 +99,7 @@ public abstract class Good implements Product{
         return volume() * weightPerUofM;
     }
 
-    public static Set getCatalog() {
+    public static List<Good> getCatalog() {
         return catalog;
     }
 
@@ -124,15 +124,19 @@ public abstract class Good implements Product{
         return false;
     }
 
-    public static Set flammableList() {
-        Set flammable = new HashSet();
-        Iterator i = Good.getCatalog().iterator();
+    public static List<Good> flammableList() {
+        List<Good> flammable = new ArrayList<>();
+        Iterator<Good> i = Good.getCatalog().iterator();
         while(i.hasNext()) {
-            Good x = (Good) i.next();
+            Good x = i.next();
             if(x.isFlammable()) {
                 flammable.add(x);
             }
         }
         return flammable;
+    }
+
+    public int compareTo(Good o) {
+        return modelNumber - o.modelNumber;
     }
 }

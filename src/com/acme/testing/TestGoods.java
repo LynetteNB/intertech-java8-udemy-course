@@ -5,6 +5,10 @@ import com.acme.domain.Liquid;
 import com.acme.domain.Solid;
 import com.acme.domain.Good.UnitOfMeasureType;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class TestGoods {
 
 	public static void main(String[] args) {
@@ -33,12 +37,15 @@ public class TestGoods {
         System.out.println(paint + " can ship via Post office? " + paint.canShipViaPostOffice());
 
 		System.out.println(Good.getCatalog());
-		Good.getCatalog().remove(new Liquid("Acme Invisible Paint", 2490, 0.65,UnitOfMeasureType.GALLON, true, 0.70, 12));
+		Good.getCatalog().remove(1);
 		System.out.println(Good.getCatalog());
 		Solid toaster = new Solid("Acme Toaster", 1755, 0.75, UnitOfMeasureType.CUBIC_FEET, false, 1.0, 1.0, 1.0);
 		Good.getCatalog().add(toaster);
 		Good.getCatalog().add(toaster);
 		System.out.println(Good.getCatalog());
 		System.out.println("Flammable products: " + Good.flammableList());
+		Collections.sort(Good.getCatalog());
+		System.out.println(Good.getCatalog());
+		System.out.println(Collections.binarySearch(Good.getCatalog(), toaster));
 	}
 }
